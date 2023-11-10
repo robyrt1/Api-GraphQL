@@ -6,9 +6,8 @@ import { DATABASE_IOC_IDS } from "../../../infra/shared/constants/database.ioc.i
 import { IDatabase } from "../../../infra/shared/interfaces/database.interface";
 import { Service } from 'typedi';
 
-@Service()
 @injectable()
-export class findByIdUserUsecase implements IFindByIdUserUseCase {
+export class FindByIdUserUsecase implements IFindByIdUserUseCase {
   constructor(@inject(DATABASE_IOC_IDS.DATABASE) private readonly database: IDatabase) {}
   async execute(id: number) {
     console.log("🚀 ~ file: findById.use.case.ts:12 ~ findByIdUserUsecase ~ execute ~ id:", id)

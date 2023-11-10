@@ -1,10 +1,10 @@
 export const USERS_IOC_IDS = {
-    SERVICE: Symbol.for('UsersService'),
+    RESOLVER: Symbol.for('UserResolver'),
     REPOSITORY: Symbol.for('UsersRepository'),
     USECASE:{
         CREATE: Symbol.for('UsersCreateUseCase'),
         GETALL: Symbol.for('UsersGetAllUseCase'),
-        FINDBYID: Symbol.for('findByIdUserUsecase'),
+        FINDBYID: Symbol.for('FindByIdUserUsecase'),
         UPDATE: Symbol.for('UsersUpdateUseCase'),
         PUTCH: Symbol.for('UsersParchUseCase')
     },

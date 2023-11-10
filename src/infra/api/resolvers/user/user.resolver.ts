@@ -1,17 +1,16 @@
 import 'reflect-metadata'
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import { Arg, Query, Resolver } from "type-graphql";
 import { USERS_IOC_IDS } from "../../../shared/constants/IOC/user.ioc.identifiers";
 import { IFindByIdUserUseCase } from "../../../../use-case/user/findById/findById.use.case";
 import { User } from "../../../../domain/user/entity/user.entity";
 import { head } from "lodash";
-import { Inject, Service } from 'typedi';
-@Service()
+
+// @injectable()
 @Resolver(User)
-export class UserService {
+export class UserResolver implements IUserResolver {
   constructor(
-    // @inject(USERS_IOC_IDS.USECASE.FINDBYID)
-    @Inject('findByIdUserUsecase')
+    @inject(USERS_IOC_IDS.USECASE.FINDBYID)
     private findByIdUserUsecase: IFindByIdUserUseCase
   ) {}
 
@@ -36,4 +35,9 @@ export class UserService {
         return error
     }
   }
+}
+
+export interface IUserResolver {
+  /* TODO: add the missing return type */
+  user(id: number): Promise<any>;
 }
