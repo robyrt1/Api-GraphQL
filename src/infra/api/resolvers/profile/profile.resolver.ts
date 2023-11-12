@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { Args, Query, Resolver } from "type-graphql";
+import { Query, Resolver } from "type-graphql";
 import { Inject, Service } from 'typedi';
 import { FindAllProfileUseCase } from '../../../../use-case/profile/findAll/findAll.use.case';
 import ErrorHandling from '../../../shared/exception/error.handler';
