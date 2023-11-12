@@ -3,7 +3,13 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Profile {
+  id: ID!
+  profiledescription: String!
+}
+
 type Query {
+  Profiles: [Profile!]!
   user(id: Float!): User!
 }
 

@@ -5,9 +5,11 @@ import { User } from "../../../../domain/user/entity/user.entity";
 import { head } from "lodash";
 import { Inject, Service } from 'typedi';
 import { ParamUserById } from './args-type/findById.arg.type';
+import ErrorHandling from '../../../shared/exception/error.handler';
 
 @Service()
 @Resolver(User)
+@ErrorHandling()
 export class UserResolver implements IUserResolver {
   constructor(
     @Inject()
@@ -20,7 +22,7 @@ export class UserResolver implements IUserResolver {
         const user = await this.findByIdUserUsecase.execute(id)
         const notUser = !!head([user]);
         if (!notUser) {
-          throw new Error('id');
+          throw new Error('User not found');
         }
     
         return user;
