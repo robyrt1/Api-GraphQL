@@ -2,25 +2,22 @@ import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { UserResolver } from "../resolvers/user/user.resolver";
-import container from "../conf/inversify/inversify.config";
-import {formatError} from '../../shared/exception/format.execption';
+import { formatError } from "../../shared/exception/format.execption";
+import { Container } from "typedi";
 
+import { UserResolver } from "../resolvers/user/user.resolver";
 const PORT = process.env.PORT || 4000;
 
 async function bootstrap() {
   const schema = await buildSchema({
-    container: ({ context }) => {
-      return container;
-    },
+    container: Container,
     resolvers: [UserResolver],
-    // container:Container,
     emitSchemaFile: true,
   });
   const server = new ApolloServer({
     schema,
-    formatError
-  })
+    formatError,
+  });
 
   const { url } = await startStandaloneServer(server, {
     listen: { port: Number(PORT) },

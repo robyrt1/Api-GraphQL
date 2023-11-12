@@ -5,4 +5,4 @@ import { Container } from "inversify";
 export default (container: Container): Container => {
     container.bind<IFindByIdUserUseCase>(USERS_IOC_IDS.USECASE.FINDBYID).to(FindByIdUserUsecase)
     return container;
-}
+}   

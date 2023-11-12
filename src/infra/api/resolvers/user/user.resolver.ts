@@ -1,29 +1,24 @@
 import 'reflect-metadata'
-import { inject, injectable } from "inversify";
-import { Arg, Query, Resolver } from "type-graphql";
-import { USERS_IOC_IDS } from "../../../shared/constants/IOC/user.ioc.identifiers";
-import { IFindByIdUserUseCase } from "../../../../use-case/user/findById/findById.use.case";
+import { Args, Query, Resolver } from "type-graphql";
+import { FindByIdUserUsecase, IFindByIdUserUseCase } from "../../../../use-case/user/findById/findById.use.case";
 import { User } from "../../../../domain/user/entity/user.entity";
 import { head } from "lodash";
+import { Inject, Service } from 'typedi';
+import { ParamUserById } from './args-type/findById.arg.type';
 
-// @injectable()
+@Service()
 @Resolver(User)
 export class UserResolver implements IUserResolver {
   constructor(
-    @inject(USERS_IOC_IDS.USECASE.FINDBYID)
-    private findByIdUserUsecase: IFindByIdUserUseCase
+    @Inject()
+    private findByIdUserUsecase: FindByIdUserUsecase
   ) {}
 
   @Query(returns => User)
-  async user(@Arg("id", {nullable: false}) id: number) {
+  async user(@Args() {id}: ParamUserById) {
     try {
-        console.log(
-          "🚀 ~ file: user.resolver.ts:13 ~ UserService ~ user ~ id:",
-          id
-        );
-
-        const user = await this.findByIdUserUsecase.execute(id);
-        const notUser = !!head(user);
+        const user = await this.findByIdUserUsecase.execute(id)
+        const notUser = !!head([user]);
         if (!notUser) {
           throw new Error('id');
         }
@@ -31,13 +26,11 @@ export class UserResolver implements IUserResolver {
         return user;
         
     } catch (error) {
-        console.log("🚀 ~ file: user.resolver.ts:31 ~ UserService ~ user ~ error:", error)
         return error
     }
   }
 }
 
 export interface IUserResolver {
-  /* TODO: add the missing return type */
-  user(id: number): Promise<any>;
+  user(id: ParamUserById): Promise<any>;
 }

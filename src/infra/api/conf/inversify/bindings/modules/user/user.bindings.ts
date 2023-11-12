@@ -4,4 +4,4 @@ import usersUsecasesBindings from './user.use.cases.bindings';
 import userResolver from './user.resolvers.bindings';
 
 export default (container: Container): Container => 
-    flow(usersUsecasesBindings)(container)
+    flow(usersUsecasesBindings,userResolver)(container)

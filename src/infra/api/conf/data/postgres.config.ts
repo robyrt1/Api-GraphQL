@@ -2,8 +2,10 @@ import { HTTP_CODES } from "../../../shared/constants/http.codes";
 import { Pool, PoolClient, QueryResult } from "pg";
 import dotenv from "dotenv";
 import { defaultTo, get, isNull, keys, size, values } from "lodash";
+import { Service } from "typedi";
 dotenv.config();
 
+@Service()
 export class PgConfig {
   private connection: Pool;
   private schema: string = "manager";
