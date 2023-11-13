@@ -67,6 +67,7 @@ export class PgConfig {
       const { rows }: QueryResult = await client.query(query, binds);
       return rows;
     } catch (error) {
+      console.log("🚀 ~ file: postgres.config.ts:70 ~ PgConfig ~ execQuery ~ error:", error)
       throw { statusCode: HTTP_CODES.INTERNAL_SERVER_ERROR, error };
     } finally {
       client.release();

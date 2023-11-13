@@ -16,7 +16,7 @@ function applyMiddlewareToFunction(func: Function): Function {
     try {
       return await func.apply(this, args);
     } catch (error) {
-      throw new Error("Ocorreu um erro inesperado.");
+      throw new Error(error);
     }
   };
 }

@@ -3,6 +3,10 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Mutation {
+  updateUser(password: String, surname: String!, userid: Float!, username: String!): User!
+}
+
 type Profile {
   id: ID!
   profiledescription: String!
