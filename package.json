@@ -16,7 +16,6 @@
     "dotenv": "^16.3.1",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.22.2",
-    "inversify": "^6.0.2",
     "lodash": "^4.17.21",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
